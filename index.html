@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10234b">
+<title>Smart School Result Management System</title>
+<style>
+:root{--navy:#10234b;--blue:#2157a5;--gold:#d4a947;--bg:#f3f6fb;--ink:#18243a;--muted:#66748a;--line:#dce4ef;--white:#fff;--green:#16794b;--red:#b42318}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink)}button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:11px 14px;font-weight:650}.primary{background:var(--blue);color:white}.secondary{background:#e8eef8;color:var(--navy)}.danger{background:#fff0ef;color:var(--red)}.top{background:linear-gradient(120deg,var(--navy),#1b4380);color:#fff;padding:18px 18px 22px;border-bottom:4px solid var(--gold)}.top-inner{max-width:1200px;margin:auto;display:flex;gap:14px;align-items:center}.crest{width:54px;height:54px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-size:25px;flex-shrink:0}.top h1{font-size:clamp(18px,3vw,26px);margin:0}.top p{margin:4px 0 0;color:#e4ebf7;font-size:13px}.shell{max-width:1200px;margin:auto;padding:16px;display:grid;grid-template-columns:220px 1fr;gap:16px}.side,.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 3px 14px #18355b0a}.side{padding:10px;height:max-content;position:sticky;top:10px}.navbtn{display:block;width:100%;text-align:left;margin:3px 0;background:transparent;color:#33435b}.navbtn.active,.navbtn:hover{background:#eaf0fa;color:var(--blue)}main{min-width:0}.heading{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:2px 0 14px}.heading h2{margin:0;font-size:23px}.muted{color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}.card{padding:16px;margin-bottom:14px}.stat-label{font-size:13px;color:var(--muted)}.stat{font-size:27px;font-weight:800;margin-top:5px}.stat-note{font-size:12px;color:var(--muted)}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:end}.field{display:flex;flex-direction:column;gap:5px;flex:1;min-width:140px}.field label{font-size:12px;font-weight:700;color:#47566c}.field input,.field select{width:100%;border:1px solid #cbd6e5;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}table{border-collapse:collapse;width:100%;min-width:650px;background:#fff}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);font-size:13px}th{background:#f2f6fc;color:#41516a;font-size:12px}tr:last-child td{border-bottom:0}.pill{display:inline-block;padding:4px 8px;border-radius:99px;background:#edf2f9;color:#4b5c73;font-size:11px;font-weight:700}.pill.good{background:#e7f6ee;color:var(--green)}.pill.warn{background:#fff4d8;color:#855d00}.empty{text-align:center;padding:24px;color:var(--muted)}.notice{padding:12px 14px;border-radius:11px;background:#fff6df;color:#73520a;font-size:13px;margin-bottom:14px}.hidden{display:none!important}.actions{display:flex;gap:7px;flex-wrap:wrap}.small{font-size:12px;padding:7px 10px}.profile{display:grid;grid-template-columns:90px 1fr;gap:14px;align-items:start}.photo{width:90px;height:110px;border-radius:10px;background:#edf2f9;border:1px dashed #aab9ce;display:grid;place-items:center;color:#718096;text-align:center;font-size:12px;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover}.footer{text-align:center;padding:15px;color:var(--muted);font-size:12px}.mobile-nav{display:none}.section-title{font-size:16px;margin:0 0 12px}.subtle{border-top:1px solid var(--line);margin-top:14px;padding-top:14px}
+@media(max-width:800px){.shell{grid-template-columns:1fr;padding:10px}.side{position:static;display:flex;overflow:auto;gap:5px;padding:7px}.navbtn{white-space:nowrap;width:auto;margin:0;padding:9px 11px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.top{padding:15px}.top-inner{align-items:flex-start}.crest{width:45px;height:45px}.card{padding:13px}.heading h2{font-size:20px}}
+@media(max-width:420px){.grid{gap:8px}.stat{font-size:23px}.field{min-width:100%}.actions button{flex:1}.profile{grid-template-columns:70px 1fr}.photo{width:70px;height:90px}}
+@media print{.top,.side,.no-print,.footer{display:none!important}.shell{display:block;padding:0}.card{box-shadow:none;border:0}.table-wrap{overflow:visible}table{min-width:0}body{background:#fff}}
+
+/* Enhanced official colour marksheet */
+.marksheet{font-family:Arial,Helvetica,sans-serif;max-width:900px;margin:0 auto;background:#fff;border:1px solid #c8d5e7;border-radius:12px;overflow:hidden;color:#17243b;box-shadow:0 4px 20px #10234b18}
+.ms-head{display:grid;grid-template-columns:76px 1fr 105px;gap:12px;align-items:center;background:linear-gradient(115deg,#0d1b3e,#2157a5);color:white;padding:12px 15px;border-bottom:5px solid #c9a84c}
+.ms-emblem{width:70px;height:70px;border-radius:50%;background:#fff;border:3px solid #c9a84c;display:grid;place-items:center;overflow:hidden}
+.ms-school{font-size:19px;line-height:1.15;font-weight:900;text-transform:uppercase;letter-spacing:.3px;margin:0}.ms-address{font-size:10px;color:#eaf0fb;margin-top:5px;line-height:1.35}.ms-udise{font-size:10px;color:#ffdf91;font-weight:800;margin-top:3px}.ms-session{background:#fff;color:#0d1b3e;border:1px solid #c9a84c;border-radius:8px;padding:7px 5px;text-align:center;font-size:10px;font-weight:800}
+.ms-title{padding:8px;text-align:center;background:#eef3fb;color:#0d1b3e;font-weight:900;font-size:16px;letter-spacing:.6px;border-bottom:1px solid #d6e0ef}.ms-body{padding:10px 13px}.ms-studentbox{display:grid;grid-template-columns:75px 1fr 98px;gap:10px;align-items:center;padding:8px;border:1px solid #d7e1ef;border-left:4px solid #c9a84c;border-radius:8px;background:linear-gradient(90deg,#f6f9ff,#fff);margin-bottom:8px}.ms-photo{width:68px;height:82px;border:1px dashed #879bb8;background:#eaf0f8;border-radius:5px;display:grid;place-items:center;overflow:hidden;text-align:center;font-size:9px;color:#63738b}.ms-photo img{width:100%;height:100%;object-fit:cover}.ms-name{font-size:15px;font-weight:900;color:#10234b;margin-bottom:4px}.ms-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 8px;font-size:9.5px}.ms-codes{text-align:center;font-size:8px;color:#53647d}.ms-qr{display:inline-grid;place-items:center;background:white;padding:3px;border:1px solid #d6e0ef;min-width:66px;min-height:66px;margin-bottom:2px}.ms-codes svg{max-width:95px!important;height:auto!important}.ms-sec{margin:8px 0 4px;background:#eaf0fa;border-left:4px solid #2157a5;padding:5px 7px;font-size:11px;font-weight:900;color:#10234b;letter-spacing:.3px}.ms-table{width:100%;border-collapse:collapse;min-width:0!important;table-layout:auto}.ms-table th{background:#2157a5!important;color:#fff!important;border:1px solid #b9c9e1;padding:4px 3px;font-size:8px;text-align:center}.ms-table td{border:1px solid #d6e0ef;padding:4px 3px;font-size:8.5px;text-align:center}.ms-table tbody tr:nth-child(even){background:#f4f7fc}.ms-table td:first-child,.ms-table th:first-child{text-align:left}.ms-table .sumrow{background:#fff1d1!important;font-weight:900}.ms-metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin:7px 0}.ms-metric{border:1px solid #d6e0ef;background:#f7f9fd;border-radius:5px;padding:5px}.ms-metric label{display:block;font-size:7.5px;color:#63738b;font-weight:800;text-transform:uppercase}.ms-metric strong{display:block;font-size:11px;color:#10234b;margin-top:2px}.ms-tag{display:inline-block;padding:3px 6px;border-radius:12px;background:#fff0ce;color:#805700;font-size:8px;font-weight:900}.ms-attgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.ms-attbox{background:#f6f8fc;border:1px solid #d6e0ef;border-radius:5px;padding:5px;font-size:8.5px}.ms-attbox b{display:block;color:#10234b;font-size:11px}.ms-activitytable td,.ms-activitytable th{font-size:8.5px}.ms-signs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:19px 4px 5px}.ms-sign{border-top:1px solid #66758b;text-align:center;padding-top:4px;font-size:8.5px}.ms-foot{display:flex;justify-content:space-between;gap:8px;background:#0d1b3e;color:#eef3fb;padding:6px 10px;font-size:7.5px}.ms-foot b{color:#ffdf91}
+@media(max-width:520px){.ms-head{grid-template-columns:48px 1fr;padding:8px;gap:7px}.ms-emblem{width:45px;height:45px}.ms-school{font-size:13px}.ms-session{grid-column:1/-1;justify-self:end}.ms-studentbox{grid-template-columns:55px 1fr;gap:6px;padding:5px}.ms-photo{width:50px;height:64px}.ms-codes{grid-column:1/-1;display:flex;justify-content:center;align-items:center;gap:8px}.ms-meta{grid-template-columns:1fr;font-size:8px}.ms-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.ms-attgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.ms-table th,.ms-table td{font-size:7px;padding:3px 2px}.ms-signs{gap:8px}}
+@page{size:A4 portrait;margin:7mm}
+@media print{html,body{background:#fff!important;margin:0!important;padding:0!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}.top,.side,.no-print,.footer{display:none!important}.shell{display:block!important;max-width:none!important;margin:0!important;padding:0!important}.shell>main>.page:not(#reports){display:none!important}#reports{display:block!important}.heading,#reports>.card>.row,#reports>.card:nth-of-type(2){display:none!important}#reports>.card{display:block!important;padding:0!important;margin:0!important;border:0!important;box-shadow:none!important;background:white!important}#reportPreview{display:block!important;margin:0!important;padding:0!important;border:0!important}.marksheet{width:100%!important;max-width:none!important;margin:0!important;border:1px solid #c8d5e7!important;border-radius:0!important;box-shadow:none!important;break-inside:avoid;page-break-inside:avoid}.ms-head,.ms-table th,.ms-foot{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}.ms-body{padding:7px 9px!important}.ms-sec{margin-top:5px!important}.ms-signs{margin-top:13px!important}#reportPreview *{break-inside:avoid} }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+</head>
+<body>
+<header class="top"><div class="top-inner"><div class="crest">📘</div><div><h1>SMART SCHOOL RESULT MANAGEMENT SYSTEM</h1><p>Government Primary School Pethgam Wagoora · Wagoora, Baramulla, J&amp;K · UDISE: 01022202207</p></div></div></header>
+<div class="shell">
+<nav class="side no-print" aria-label="Main navigation">
+<button class="navbtn active" data-page="dashboard">▦ Dashboard</button>
+<button class="navbtn" data-page="students">♙ Student Profiles</button>
+<button class="navbtn" data-page="import">⇧ Excel Import</button>
+<button class="navbtn" data-page="marks">▤ Marks &amp; Results</button>
+<button class="navbtn" data-page="attendance">✓ Attendance</button>
+<button class="navbtn" data-page="activities">✦ Activities</button>
+<button class="navbtn" data-page="reports">▧ Reports &amp; Marksheets</button>
+<button class="navbtn" data-page="settings">⚙ Settings</button>
+</nav>
+<main>
+<section id="dashboard" class="page">
+<div class="heading"><div><h2>Dashboard</h2><div class="muted">Academic overview · <span id="sessionLabel">2026–27</span></div></div><button class="primary no-print" onclick="showPage('students')">＋ Add Student</button></div>
+<div class="notice"><b>Prototype / local mode:</b> records stay in this browser on this device. This starter does not upload data to a server, and it is not yet a production-secure multi-user system. Export backups regularly.</div>
+<div class="grid"><div class="card"><div class="stat-label">Students</div><div class="stat" id="statStudents">0</div><div class="stat-note">Saved student profiles</div></div><div class="card"><div class="stat-label">Results entered</div><div class="stat" id="statResults">0</div><div class="stat-note">Students with marks</div></div><div class="card"><div class="stat-label">Attendance entries</div><div class="stat" id="statAttendance">0</div><div class="stat-note">Daily student records</div></div><div class="card"><div class="stat-label">Incomplete results</div><div class="stat" id="statIncomplete">0</div><div class="stat-note">Need review</div></div></div>
+<div class="card"><h3 class="section-title">Quick actions</h3><div class="actions no-print"><button class="secondary" onclick="showPage('students')">Manage students</button><button class="secondary" onclick="showPage('import')">Inspect Excel file</button><button class="secondary" onclick="showPage('marks')">Enter marks</button><button class="secondary" onclick="showPage('reports')">Generate report</button></div></div>
+<div class="card"><h3 class="section-title">Recent student records</h3><div id="recentTable"></div></div>
+</section>
+<section id="students" class="page hidden">
+<div class="heading"><div><h2>Student Profiles</h2><div class="muted">Create and maintain student records.</div></div><button class="secondary no-print" onclick="exportJSON()">Export backup</button></div>
+<div class="card"><h3 class="section-title" id="studentFormTitle">Add student</h3><form id="studentForm"><input type="hidden" id="editId"><div class="row"><div class="field"><label>Full name *</label><input id="name" required></div><div class="field"><label>Father / guardian name</label><input id="guardian"></div><div class="field"><label>Date of birth</label><input id="dob" type="date"></div></div><div class="row" style="margin-top:10px"><div class="field"><label>Class *</label><select id="className" required><option>Pre Primary 3</option><option>Pre Primary 2</option><option>Balvatika</option><option>Grade 1</option><option>Grade 2</option><option>Grade 3</option><option>Grade 4</option><option>Grade 5</option></select></div><div class="field"><label>Section</label><input id="section" placeholder="e.g. A"></div><div class="field"><label>Roll number</label><input id="roll"></div><div class="field"><label>Admission number</label><input id="admission"></div></div><div class="row" style="margin-top:10px"><div class="field"><label>APAAR ID (optional)</label><input id="apaar" inputmode="numeric"></div><div class="field"><label>PEN (optional)</label><input id="pen"></div><div class="field"><label>UDISE+ student ID (optional)</label><input id="udise"></div><div class="field"><label>Contact number</label><input id="contact" inputmode="tel"></div></div><div class="row" style="margin-top:10px"><div class="field"><label>Address</label><input id="address"></div><div class="field"><label>Photograph</label><input id="photo" type="file" accept="image/*"></div><div class="field"><label>Status</label><select id="status"><option>Active</option><option>Transferred</option><option>Withdrawn</option><option>Graduated</option></select></div></div><div class="actions" style="margin-top:14px"><button class="primary" type="submit">Save student</button><button class="secondary" type="button" onclick="resetStudentForm()">Clear form</button></div></form></div>
+<div class="card"><div class="row"><div class="field"><label>Search students</label><input id="studentSearch" placeholder="Name, roll, admission, PEN…" oninput="renderStudents()"></div><div class="field"><label>Filter class</label><select id="classFilter" onchange="renderStudents()"><option value="">All classes</option><option>Pre Primary 3</option><option>Pre Primary 2</option><option>Balvatika</option><option>Grade 1</option><option>Grade 2</option><option>Grade 3</option><option>Grade 4</option><option>Grade 5</option></select></div></div><div id="studentsTable" style="margin-top:12px"></div></div>
+</section>
+<section id="import" class="page hidden">
+<div class="heading"><div><h2>Excel Import &amp; Validation</h2><div class="muted">Read your actual workbooks, preview records, then import after confirmation.</div></div></div>
+<div class="notice"><b>Local processing:</b> workbook contents are read in this browser. The files are not uploaded to a server. Import only after reviewing the preview. Keep a backup of your original workbooks.</div>
+<div class="card">
+<h3 class="section-title">1. Result workbook</h3>
+<p class="muted">Supports the school result workbook layout with student profiles and assessment columns for English, Mathematics, EVS, Urdu and Kashmiri.</p>
+<div class="field"><label>Select Result Excel workbook (.xlsx / .xls)</label><input id="resultWorkbook" type="file" accept=".xlsx,.xls"></div>
+<div id="resultWorkbookInfo" class="subtle muted">No result workbook selected.</div>
+<div class="actions no-print" style="margin-top:12px"><button class="secondary" onclick="previewWorkbook('result')">Preview result workbook</button><button class="primary" onclick="importWorkbook('result')">Import result workbook</button></div>
+<div id="resultWorkbookPreview" class="subtle"></div>
+</div>
+<div class="card">
+<h3 class="section-title">2. Attendance workbook</h3>
+<p class="muted">Supports monthly attendance, brought-forward totals, cumulative totals, total days and percentage. Monthly summaries are stored separately from daily attendance.</p>
+<div class="field"><label>Select Attendance Excel workbook (.xlsx / .xls)</label><input id="attendanceWorkbook" type="file" accept=".xlsx,.xls"></div>
+<div id="attendanceWorkbookInfo" class="subtle muted">No attendance workbook selected.</div>
+<div class="actions no-print" style="margin-top:12px"><button class="secondary" onclick="previewWorkbook('attendance')">Preview attendance workbook</button><button class="primary" onclick="importWorkbook('attendance')">Import attendance workbook</button></div>
+<div id="attendanceWorkbookPreview" class="subtle"></div>
+</div>
+<div class="card"><h3 class="section-title">Import safeguards</h3><ul><li>Blank marks remain blank; an actual zero remains zero.</li><li>Existing students are matched by admission number where available, otherwise by normalized name and class.</li><li>Repeated imports update matching records instead of intentionally adding duplicates.</li><li>Attendance month summaries are not converted into fabricated daily present/absent records.</li><li>Review warnings and export a JSON backup after importing.</li></ul></div>
+</section>
+<section id="marks" class="page hidden">
+<div class="heading"><div><h2>Marks &amp; Results</h2><div class="muted">Enter assessment marks; incomplete records will not receive a rank.</div></div></div>
+<div class="card"><form id="marksForm"><div class="row"><div class="field"><label>Student *</label><select id="marksStudent" required></select></div><div class="field"><label>Assessment</label><select id="assessment"><option>FA1</option><option>FA2</option><option>FA3</option><option>FA4</option><option>FA5</option><option>FA6</option><option>Co-curricular</option><option>Summative Assessment</option></select></div><div class="field"><label>Subject</label><select id="subject"><option>Urdu</option><option>English</option><option>Mathematics</option><option>Kashmiri</option><option>EVS</option><option>Developmental Evaluation</option></select></div></div><div class="row" style="margin-top:10px"><div class="field"><label>Marks obtained (leave blank if not assessed)</label><input id="obtained" type="number" min="0" step="any" placeholder="Blank is not zero"></div><div class="field"><label>Maximum marks</label><input id="maximum" type="number" min="0.01" step="any" value="10" required></div><div class="field"><label>Mark status</label><select id="markStatus"><option>Scored</option><option>Absent</option><option>Exempted</option><option>Not Conducted</option><option>Not Applicable</option></select></div></div><div class="actions" style="margin-top:14px"><button class="primary" type="submit">Save marks</button><button class="secondary" type="button" onclick="renderMarks()">Refresh results</button></div></form></div>
+<div class="card"><h3 class="section-title">Saved assessment records</h3><div id="marksTable"></div></div>
+</section>
+<section id="attendance" class="page hidden">
+<div class="heading"><div><h2>Attendance</h2><div class="muted">Daily attendance with working-day-aware summaries.</div></div></div>
+<div class="card"><form id="attendanceForm"><div class="row"><div class="field"><label>Student *</label><select id="attendanceStudent" required></select></div><div class="field"><label>Date *</label><input id="attendanceDate" type="date" required></div><div class="field"><label>Attendance status</label><select id="attendanceStatus"><option>Present</option><option>Absent</option><option>Authorized Leave</option><option>Holiday / Non-working day</option></select></div></div><div class="actions" style="margin-top:14px"><button class="primary">Save attendance</button></div></form></div><div class="card"><h3 class="section-title">Daily attendance records</h3><div id="attendanceTable"></div></div><div class="card"><h3 class="section-title">Imported monthly attendance summaries</h3><div id="attendanceSummaryTable"></div><p class="muted">Imported monthly/cumulative summaries, not individual daily entries.</p></div>
+</section>
+<section id="activities" class="page hidden">
+<div class="heading"><div><h2>Curricular &amp; Co-curricular Evaluation</h2><div class="muted">Kept separate from academic marks.</div></div></div>
+<div class="card"><form id="activityForm"><div class="row"><div class="field"><label>Student *</label><select id="activityStudent" required></select></div><div class="field"><label>Category</label><select id="activityCategory"><option>Reading Skills</option><option>Writing Skills</option><option>Oral Expression</option><option>Mathematical Skills</option><option>Problem-Solving Ability</option><option>Art and Craft</option><option>Music and Singing</option><option>Sports and Physical Education</option><option>Cleanliness and Hygiene</option><option>Teamwork</option><option>Creativity</option><option>Leadership</option></select></div><div class="field"><label>Evaluation</label><select id="activityRating"><option>Excellent</option><option>Very Good</option><option>Good</option><option>Satisfactory</option><option>Needs Improvement</option></select></div></div><div class="row" style="margin-top:10px"><div class="field"><label>Teacher observation (optional)</label><input id="activityRemark" maxlength="300" placeholder="Evidence-based, specific observation"></div></div><div class="actions" style="margin-top:14px"><button class="primary">Save evaluation</button></div></form></div><div class="card"><h3 class="section-title">Saved evaluations</h3><div id="activitiesTable"></div></div>
+</section>
+<section id="reports" class="page hidden">
+<div class="heading"><div><h2>Reports &amp; Marksheets</h2><div class="muted">Preview, print or save as PDF from the Android browser print dialog where available.</div></div><button class="primary no-print" onclick="window.print()">Print / Save PDF</button></div>
+<div class="card"><div class="row"><div class="field"><label>Select student</label><select id="reportStudent" onchange="renderReport()"></select></div><div class="field"><label>Academic session</label><input id="reportSession" value="2026–27" onchange="document.getElementById('sessionLabel').textContent=this.value;renderReport()"></div></div><div id="reportPreview" class="subtle"></div></div>
+<div class="card"><h3 class="section-title">Export data</h3><p class="muted">CSV exports contain student and academic records. Handle them as confidential school records.</p><div class="actions no-print"><button class="secondary" onclick="exportCSV('students')">Export students CSV</button><button class="secondary" onclick="exportCSV('marks')">Export marks CSV</button><button class="secondary" onclick="exportCSV('attendance')">Export attendance CSV</button><button class="secondary" onclick="exportJSON()">Full JSON backup</button></div></div>
+</section>
+<section id="settings" class="page hidden">
+<div class="heading"><div><h2>Settings</h2><div class="muted">School profile and local data controls.</div></div></div>
+<div class="card"><form id="settingsForm"><div class="row"><div class="field"><label>School name</label><input id="schoolName" value="Government Primary School Pethgam Wagoora" required></div><div class="field"><label>Academic session</label><input id="schoolSession" value="2026–27" required></div></div><div class="row" style="margin-top:10px"><div class="field"><label>UDISE code</label><input id="schoolUdise" value="01022202207"></div><div class="field"><label>Head of Institution</label><input id="schoolHoi" value="Mohammad Ashraf Rather"></div></div><div class="field" style="margin-top:10px"><label>Address</label><input id="schoolAddress" value="Wagoora Babareshi Road, Near Zonal Education Office Wagoora, District Baramulla, Jammu & Kashmir – 193109"></div><div class="actions" style="margin-top:14px"><button class="primary">Save settings</button><button type="button" class="secondary" onclick="document.getElementById('restoreFile').click()">Restore JSON backup</button><input id="restoreFile" class="hidden" type="file" accept=".json"></div></form></div>
+<div class="card"><h3 class="section-title">Privacy &amp; data management</h3><p class="muted">This prototype stores data in browser local storage. Anyone with access to this browser profile may be able to access it. Do not use it for real sensitive student data on shared devices until proper authentication, server-side authorization, encrypted backups and access controls are implemented.</p><div class="actions no-print"><button class="danger" onclick="clearAll()">Delete all local prototype data</button></div></div>
+<div class="card"><h3 class="section-title">Free deployment path</h3><p>Use this HTML prototype free on Android by opening it in a browser or hosting it on a free static-hosting tier. Static hosting alone does not provide secure multi-user accounts or a shared database; those require a backend and must be configured separately.</p></div>
+</section>
+</main></div>
+<div class="footer">Smart School Result Management System · Prototype build · Verify all calculations and records before official use.</div>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+const KEY='gps_pethgam_smart_results_v1';
+let db={students:[],marks:[],attendance:[],attendanceSummaries:[],activities:[],settings:{schoolName:'Government Primary School Pethgam Wagoora',session:'2026–27',udise:'01022202207',hoi:'Mohammad Ashraf Rather',address:'Wagoora Babareshi Road, Near Zonal Education Office Wagoora, District Baramulla, Jammu & Kashmir – 193109'}};
+function load(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&typeof x==='object')db={...db,...x,attendanceSummaries:Array.isArray(x.attendanceSummaries)?x.attendanceSummaries:[],settings:{...db.settings,...(x.settings||{})}}}catch(e){}}
+function save(){localStorage.setItem(KEY,JSON.stringify(db));updateAll()}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function id(){return 's'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function student(idv){return db.students.find(s=>s.id===idv)}
+function nameOf(idv){const s=student(idv);return s?s.name:'Unknown student'}
+function showPage(page){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));document.getElementById(page).classList.remove('hidden');document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));updateAll();window.scrollTo(0,0)}
+document.querySelectorAll('.navbtn').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function resetStudentForm(){document.getElementById('studentForm').reset();document.getElementById('editId').value='';document.getElementById('studentFormTitle').textContent='Add student'}
+let pendingPhoto='';
+document.getElementById('photo').addEventListener('change',e=>{const f=e.target.files[0];if(!f){pendingPhoto='';return}if(f.size>1.5*1024*1024){alert('Please choose a photo under 1.5 MB.');e.target.value='';pendingPhoto='';return}const r=new FileReader();r.onload=()=>pendingPhoto=r.result;r.readAsDataURL(f)});
+document.getElementById('studentForm').addEventListener('submit',e=>{e.preventDefault();const edit=document.getElementById('editId').value;const old=student(edit);const s={id:edit||id(),name:val('name'),guardian:val('guardian'),dob:val('dob'),className:val('className'),section:val('section'),roll:val('roll'),admission:val('admission'),apaar:val('apaar'),pen:val('pen'),udise:val('udise'),contact:val('contact'),address:val('address'),status:val('status'),photo:pendingPhoto||old?.photo||''};if(old)db.students=db.students.map(x=>x.id===edit?s:x);else db.students.push(s);pendingPhoto='';resetStudentForm();save();showPage('students')});
+function val(idv){return document.getElementById(idv).value.trim()}
+function editStudent(idv){const s=student(idv);if(!s)return;['name','guardian','dob','className','section','roll','admission','apaar','pen','udise','contact','address','status'].forEach(k=>document.getElementById(k).value=s[k]||'');document.getElementById('editId').value=s.id;document.getElementById('studentFormTitle').textContent='Edit student';pendingPhoto='';window.scrollTo(0,0)}
+function deleteStudent(idv){if(!confirm('Delete this student and related local marks, attendance and evaluations?'))return;db.students=db.students.filter(s=>s.id!==idv);db.marks=db.marks.filter(m=>m.studentId!==idv);db.attendance=db.attendance.filter(a=>a.studentId!==idv);db.activities=db.activities.filter(a=>a.studentId!==idv);save()}
+function renderStudents(){const q=(document.getElementById('studentSearch')?.value||'').toLowerCase(),cl=document.getElementById('classFilter')?.value||'';const arr=db.students.filter(s=>(!cl||s.className===cl)&&[s.name,s.roll,s.admission,s.pen,s.apaar,s.className].some(v=>(v||'').toLowerCase().includes(q)));document.getElementById('studentsTable').innerHTML=arr.length?table(['Student','Class / Roll','APAAR / PEN','Status','Actions'],arr.map(s=>[`<b>${esc(s.name)}</b><div class="muted">${esc(s.guardian)}</div>`,`${esc(s.className)}${s.section?' / '+esc(s.section):''} · ${esc(s.roll||'No roll')}`,`APAAR: ${esc(s.apaar||'Not Provided')}<br>PEN: ${esc(s.pen||'Not Provided')}`,`<span class="pill">${esc(s.status)}</span>`,`<button class="secondary small" onclick="editStudent('${s.id}')">Edit</button> <button class="danger small" onclick="deleteStudent('${s.id}')">Delete</button>`])):'<div class="empty">No student records yet. Add a student above or import after workbook mapping is implemented.</div>'}
+function table(headers,rows){return '<div class="table-wrap"><table><thead><tr>'+headers.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>'}
+function fillSelect(idv,placeholder='Choose student'){const el=document.getElementById(idv);if(!el)return;const old=el.value;el.innerHTML='<option value="">'+placeholder+'</option>'+db.students.filter(s=>s.status==='Active').map(s=>`<option value="${s.id}">${esc(s.name)} — ${esc(s.className)}${s.roll?' · Roll '+esc(s.roll):''}</option>`).join('');if([...el.options].some(o=>o.value===old))el.value=old}
+document.getElementById('marksForm').addEventListener('submit',e=>{e.preventDefault();const studentId=val('marksStudent'),obt=val('obtained'),max=Number(val('maximum')),status=val('markStatus');if(!studentId)return alert('Choose a student.');if(!(max>0))return alert('Maximum marks must be greater than zero.');if(status==='Scored'&&obt!==''&&(Number(obt)<0||Number(obt)>max))return alert('Marks must be between zero and maximum marks.');db.marks.push({id:id(),studentId,assessment:val('assessment'),subject:val('subject'),obtained:obt===''?null:Number(obt),maximum:max,status,date:new Date().toISOString().slice(0,10)});e.target.reset();document.getElementById('maximum').value=10;save()});
+function renderMarks(){const arr=[...db.marks].reverse();document.getElementById('marksTable').innerHTML=arr.length?table(['Student','Class','Assessment','Subject','Marks','Status','Action'],arr.map(m=>{const s=student(m.studentId);return [esc(nameOf(m.studentId)),esc(s?.className||'—'),esc(m.assessment),esc(m.subject),m.obtained===null?'—':`${m.obtained} / ${m.maximum}`,`<span class="pill ${m.status==='Scored'&&m.obtained!==null?'good':'warn'}">${esc(m.status==='Scored'&&m.obtained===null?'Incomplete':m.status)}</span>`,`<button class="danger small" onclick="deleteRecord('marks','${m.id}')">Delete</button>`]})):'<div class="empty">No marks entered yet.</div>'}
+function deleteRecord(type,rid){if(confirm('Delete this record?')){db[type]=db[type].filter(x=>x.id!==rid);save()}}
+document.getElementById('attendanceForm').addEventListener('submit',e=>{e.preventDefault();const rec={id:id(),studentId:val('attendanceStudent'),date:val('attendanceDate'),status:val('attendanceStatus')};if(!rec.studentId)return alert('Choose a student.');if(db.attendance.some(a=>a.studentId===rec.studentId&&a.date===rec.date)){if(!confirm('An attendance entry already exists for this student and date. Add another entry anyway?'))return}db.attendance.push(rec);save()});
+function renderAttendance(){const arr=[...db.attendance].reverse();document.getElementById('attendanceTable').innerHTML=arr.length?table(['Date','Student','Class','Status','Action'],arr.map(a=>[esc(a.date),esc(nameOf(a.studentId)),esc(student(a.studentId)?.className||'—'),`<span class="pill">${esc(a.status)}</span>`,`<button class="danger small" onclick="deleteRecord('attendance','${a.id}')">Delete</button>`])):'<div class="empty">No attendance records yet.</div>'}
+function renderAttendanceSummaries(){
+ const arr=db.attendanceSummaries||[];
+ document.getElementById('attendanceSummaryTable').innerHTML=arr.length?table(['Student','Class','Monthly attendance','Total days','Attendance %','Source'],arr.map(a=>{
+  const s=student(a.studentId),months=(a.months||[]).map(m=>`${esc(m.month)}: ${esc(m.present)}`).join('<br>')||'—';
+  return [esc(s?.name||'Unknown student'),esc(s?.className||'—'),months,esc(a.totalDays??'—'),a.percentage===null||a.percentage===undefined?'—':esc(Number(a.percentage).toFixed(2)+'%'),esc(a.sourceWorkbook||'Imported workbook')];
+ })):'<div class="empty">No monthly attendance summaries imported yet.</div>';
+}
+document.getElementById('activityForm').addEventListener('submit',e=>{e.preventDefault();if(!val('activityStudent'))return alert('Choose a student.');db.activities.push({id:id(),studentId:val('activityStudent'),category:val('activityCategory'),rating:val('activityRating'),remark:val('activityRemark'),date:new Date().toISOString().slice(0,10)});e.target.reset();save()});
+function renderActivities(){const arr=[...db.activities].reverse();document.getElementById('activitiesTable').innerHTML=arr.length?table(['Student','Category','Rating','Observation','Action'],arr.map(a=>[esc(nameOf(a.studentId)),esc(a.category),`<span class="pill">${esc(a.rating)}</span>`,esc(a.remark||'—'),`<button class="danger small" onclick="deleteRecord('activities','${a.id}')">Delete</button>`])):'<div class="empty">No evaluations recorded. No rating is assigned automatically.</div>'}
+function renderReport(){
+ const sid=document.getElementById('reportStudent')?.value;
+ const target=document.getElementById('reportPreview');
+ if(!sid){target.innerHTML='<div class="empty">Add students and select a student to preview a marksheet.</div>';return}
+ const s=student(sid);if(!s)return;
+ const session=document.getElementById('reportSession').value||db.settings.session||'2026–27';
+ const ms=db.marks.filter(m=>m.studentId===sid);
+ const subjects=['English','Mathematics','EVS','Urdu','Kashmiri'];
+ const assessments=['FA1','FA2','FA3','FA4','FA5','FA6','Co-curricular','Summative Assessment'];
+ const maxDefault={'FA1':5,'FA2':5,'FA3':5,'FA4':5,'FA5':5,'FA6':5,'Co-curricular':20,'Summative Assessment':50};
+ const lookup=(sub,ass)=>ms.find(m=>m.subject===sub&&m.assessment===ass);
+ const fmtMark=m=>!m?'—':m.status==='Absent'?'ABS':m.status==='Exempted'?'EX':m.status==='Not Conducted'?'NC':m.status==='Not Applicable'?'N/A':m.obtained===null||m.obtained===undefined?'—':String(m.obtained);
+ const allApplicable=subjects.filter(sub=>!(s.className==='Grade 1'||s.className==='Grade 2')||sub!=='EVS');
+ const subjectRows=allApplicable.map(sub=>{
+  const cells=assessments.map(a=>{const m=lookup(sub,a);return `<td>${fmtMark(m)}</td>`}).join('');
+  const entries=assessments.map(a=>lookup(sub,a)).filter(m=>m&&m.status==='Scored'&&m.obtained!==null&&m.obtained!==undefined);
+  const got=entries.reduce((n,m)=>n+Number(m.obtained),0),mx=entries.reduce((n,m)=>n+Number(m.maximum||maxDefault[m.assessment]||0),0);
+  const complete=assessments.every(a=>{const m=lookup(sub,a);return m&&((m.status==='Scored'&&m.obtained!==null&&m.obtained!==undefined)||m.status==='Not Applicable')});
+  return `<tr><td><b>${esc(sub)}</b></td>${cells}<td>${entries.length?got:'—'}</td><td>${entries.length?mx:'—'}</td><td>${mx?(got/mx*100).toFixed(1)+'%':'—'}</td></tr>`;
+ });
+ const validMarks=ms.filter(m=>m.status==='Scored'&&m.obtained!==null&&m.obtained!==undefined);
+ const got=validMarks.reduce((n,m)=>n+Number(m.obtained),0),max=validMarks.reduce((n,m)=>n+Number(m.maximum||0),0);
+ const expected=allApplicable.length*assessments.length;
+ const complete=allApplicable.every(sub=>assessments.every(a=>{const m=lookup(sub,a);return m&&((m.status==='Scored'&&m.obtained!==null&&m.obtained!==undefined)||m.status==='Not Applicable')}));
+ const hasMarks=validMarks.length>0;
+ const recordRef=`GPS-${String(s.admission||s.roll||s.id||'STUDENT').replace(/[^a-z0-9]/gi,'').slice(0,12)}-${String(session).replace(/[^0-9]/g,'').slice(0,6)}`;
+ const activityRows=db.activities.filter(a=>a.studentId===sid);
+ const att=db.attendance.filter(a=>a.studentId===sid&&!['Holiday / Non-working day'].includes(a.status));
+ const eligible=att.filter(a=>['Present','Absent'].includes(a.status));
+ const present=eligible.filter(a=>a.status==='Present').length,absent=eligible.filter(a=>a.status==='Absent').length;
+ const importedAtt=(db.attendanceSummaries||[]).find(a=>a.studentId===sid);
+ const attPct=importedAtt&&importedAtt.percentage!==null&&importedAtt.percentage!==undefined?Number(importedAtt.percentage).toFixed(2)+'%':eligible.length?(present/eligible.length*100).toFixed(2)+'%':'Unavailable';
+ const logo=`<svg viewBox="0 0 100 100" width="64" height="64" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" fill="#0d1b3e" stroke="#c9a84c" stroke-width="4"/><circle cx="50" cy="50" r="37" fill="#fff"/><path d="M17 55 Q33 46 50 57 Q67 46 83 55 L83 73 Q65 64 50 75 Q35 64 17 73Z" fill="#2157a5"/><path d="M20 53 Q35 44 50 54 Q65 44 80 53 L80 70 Q65 62 50 72 Q35 62 20 70Z" fill="#fff" stroke="#c9a84c" stroke-width="2"/><path d="M50 17 L56 33 L73 33 L59 43 L64 59 L50 49 L36 59 L41 43 L27 33 L44 33Z" fill="#ff6f00"/><path d="M12 80 Q50 92 88 80" fill="none" stroke="#005a3c" stroke-width="4"/></svg>`;
+ target.innerHTML=`<article class="marksheet" id="printMarksheet">
+ <header class="ms-head"><div class="ms-emblem">${logo}</div><div><h1 class="ms-school">${esc(db.settings.schoolName||'Government Primary School Pethgam Wagoora')}</h1><div class="ms-address">${esc(db.settings.address||'Wagoora Babareshi Road, Near Zonal Education Office Wagoora, District Baramulla, Jammu & Kashmir – 193109')}</div><div class="ms-udise">UDISE CODE: ${esc(db.settings.udise||'01022202207')} · TALEEM · TEHZEEB · TARAQQI</div></div><div class="ms-session">ACADEMIC SESSION<br><span style="font-size:13px">${esc(session)}</span></div></header>
+ <div class="ms-title">STUDENT PROGRESS MARKSHEET</div><div class="ms-body">
+ <section class="ms-studentbox"><div class="ms-photo">${s.photo?`<img src="${s.photo}" alt="Student photograph">`:'STUDENT PHOTO'}</div><div><div class="ms-name">${esc(s.name)}</div><div class="ms-meta"><span><b>Class:</b> ${esc(s.className||'—')}</span><span><b>Roll No:</b> ${esc(s.roll||'—')}</span><span><b>Parent/Guardian:</b> ${esc(s.guardian||'—')}</span><span><b>Admission No:</b> ${esc(s.admission||'—')}</span><span><b>APAAR ID:</b> ${esc(s.apaar||'Not provided')}</span><span><b>PEN:</b> ${esc(s.pen||'Not provided')}</span><span><b>Date of Birth:</b> ${esc(s.dob||'—')}</span><span><b>Record Ref:</b> ${esc(recordRef)}</span></div></div><div class="ms-codes"><div><div id="msQrCode" class="ms-qr"></div><div>RECORD QR</div></div><div><svg id="msBarcode"></svg><div>STUDENT BARCODE</div></div></div></section>
+ <h3 class="ms-sec">ASSESSMENT-WISE ACADEMIC PERFORMANCE</h3><div style="font-size:8px;color:#61728b;margin:0 0 4px">FA1–FA6: Formative Assessments · CC: Co-curricular · SA: Summative Assessment. “—” means no mark was provided; it is not zero.</div>
+ <table class="ms-table"><thead><tr><th>Subject</th><th>FA1<br>/5</th><th>FA2<br>/5</th><th>FA3<br>/5</th><th>FA4<br>/5</th><th>FA5<br>/5</th><th>FA6<br>/5</th><th>CC<br>/20</th><th>SA<br>/50</th><th>Total</th><th>Max</th><th>%</th></tr></thead><tbody>${subjectRows.join('')}<tr class="sumrow"><td>Overall total</td>${assessments.map(a=>{const arr=allApplicable.flatMap(sub=>{const m=lookup(sub,a);return m&&m.status==='Scored'&&m.obtained!==null?[Number(m.obtained)]:[]});return `<td>${arr.length?arr.reduce((x,y)=>x+y,0):'—'}</td>`}).join('')}<td>${hasMarks?got:'—'}</td><td>${hasMarks?max:'—'}</td><td>${max?(got/max*100).toFixed(2)+'%':'—'}</td></tr></tbody></table>
+ <div class="ms-metrics"><div class="ms-metric"><label>Total Marks</label><strong>${hasMarks?got:'Unavailable'} / ${hasMarks?max:'—'}</strong></div><div class="ms-metric"><label>Percentage</label><strong>${max?(got/max*100).toFixed(2)+'%':'Unavailable'}</strong></div><div class="ms-metric"><label>Grade</label><strong>Pending rules</strong></div><div class="ms-metric"><label>Class Rank</label><strong>Not calculated</strong></div><div class="ms-metric"><label>School Rank</label><strong>Not calculated</strong></div></div>
+ <div style="font-size:8.5px;margin:3px 0 7px"><b>Result status:</b> <span class="ms-tag">${complete&&hasMarks?'PROVISIONAL':'INCOMPLETE / REVIEW REQUIRED'}</span> &nbsp; <b>Assessment records:</b> ${validMarks.length} scored entries. Ranks and grades require verified data and approved rules.</div>
+ <h3 class="ms-sec">ATTENDANCE SUMMARY</h3><div class="ms-attgrid"><div class="ms-attbox">Monthly/annual total days<b>${importedAtt?.totalDays??'Unavailable'}</b></div><div class="ms-attbox">Attendance percentage<b>${attPct}</b></div><div class="ms-attbox">Daily present<b>${present}</b></div><div class="ms-attbox">Daily absent<b>${absent}</b></div></div>${importedAtt&&(importedAtt.months||[]).length?`<table class="ms-table" style="margin-top:5px"><thead><tr><th>Month</th><th>Attendance recorded</th></tr></thead><tbody>${importedAtt.months.map(m=>`<tr><td>${esc(m.month)}</td><td>${esc(m.present??'—')}</td></tr>`).join('')}</tbody></table>`:''}
+ <h3 class="ms-sec">CURRICULAR &amp; CO-CURRICULAR ACTIVITIES</h3>${activityRows.length?`<table class="ms-table ms-activitytable"><thead><tr><th>Activity / Skill</th><th>Evaluation</th><th>Teacher observation</th></tr></thead><tbody>${activityRows.map(a=>`<tr><td>${esc(a.category)}</td><td>${esc(a.rating)}</td><td>${esc(a.remark||'—')}</td></tr>`).join('')}</tbody></table>`:'<div style="font-size:8.5px;padding:3px 0 5px">Activity evaluations have not been entered. Enter them under Activities; the system will show each recorded evaluation here.</div>'}
+ <div class="ms-signs"><div class="ms-sign">Class Teacher</div><div class="ms-sign">Head of Institution</div><div class="ms-sign">Parent / Guardian</div></div></div><footer class="ms-foot"><span><b>Government Primary School Pethgam Wagoora</b> · Computer-generated report</span><span>Ref: ${esc(recordRef)} · Verify before official issue</span></footer></article>`;
+ const qrEl=document.getElementById('msQrCode');
+ if(qrEl&&window.QRCode){try{new QRCode(qrEl,{text:JSON.stringify({school:db.settings.udise||'01022202207',reference:recordRef,student:s.id,session}),width:62,height:62,colorDark:'#10234b',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M})}catch(e){qrEl.textContent=recordRef}}else if(qrEl){qrEl.textContent=recordRef}
+ const bar=document.getElementById('msBarcode');if(bar&&window.JsBarcode){try{JsBarcode(bar,String(s.admission||s.roll||recordRef),{format:'CODE128',width:1,height:23,displayValue:false,margin:1,lineColor:'#10234b',background:'#ffffff'})}catch(e){bar.outerHTML=`<div style="font-size:8px">${esc(recordRef)}</div>`}}else if(bar){bar.outerHTML=`<div style="font-size:8px">${esc(recordRef)}</div>`}
+}
+function updateAll(){document.getElementById('statStudents').textContent=db.students.filter(s=>s.status==='Active').length;const withMarks=new Set(db.marks.filter(m=>m.status==='Scored'&&m.obtained!==null).map(m=>m.studentId));document.getElementById('statResults').textContent=withMarks.size;document.getElementById('statAttendance').textContent=db.attendance.length;document.getElementById('statIncomplete').textContent=new Set(db.marks.filter(m=>m.status==='Scored'&&m.obtained===null).map(m=>m.studentId)).size;document.getElementById('schoolName').value=db.settings.schoolName;document.getElementById('schoolSession').value=db.settings.session;document.getElementById('schoolUdise').value=db.settings.udise;document.getElementById('schoolHoi').value=db.settings.hoi;document.getElementById('schoolAddress').value=db.settings.address;document.getElementById('sessionLabel').textContent=db.settings.session;document.getElementById('reportSession').value=db.settings.session;renderStudents();renderMarks();renderAttendance();renderAttendanceSummaries();renderActivities();fillSelect('marksStudent');fillSelect('attendanceStudent');fillSelect('activityStudent');fillSelect('reportStudent');document.getElementById('recentTable').innerHTML=db.students.length?table(['Student','Class','Status'],db.students.slice(-5).reverse().map(s=>[esc(s.name),esc(s.className),`<span class="pill">${esc(s.status)}</span>`])):'<div class="empty">No students added. Start by creating a student profile.</div>';renderReport()}
+document.getElementById('settingsForm').addEventListener('submit',e=>{e.preventDefault();db.settings={schoolName:val('schoolName'),session:val('schoolSession'),udise:val('schoolUdise'),hoi:val('schoolHoi'),address:val('schoolAddress')};save();alert('Settings saved on this device.')});
+
+const workbookCache={result:null,attendance:null};
+['result','attendance'].forEach(kind=>{
+ const el=document.getElementById(kind==='result'?'resultWorkbook':'attendanceWorkbook');
+ el.addEventListener('change',e=>{
+  const f=e.target.files[0];workbookCache[kind]=null;
+  document.getElementById(kind==='result'?'resultWorkbookInfo':'attendanceWorkbookInfo').textContent=f?`Selected: ${f.name} · ${(f.size/1024).toFixed(1)} KB · Last modified: ${new Date(f.lastModified).toLocaleString()}`:`No ${kind} workbook selected.`;
+  document.getElementById(kind==='result'?'resultWorkbookPreview':'attendanceWorkbookPreview').innerHTML='';
+ });
+});
+function classLabel(v){
+ const s=String(v??'').trim().toLowerCase().replace(/\s+/g,' ');
+ if(s.includes('balvatika'))return 'Balvatika';
+ if(s.includes('pre primary 3')||s.includes('nursery'))return 'Pre Primary 3';
+ if(s.includes('pre primary 2')||s.includes('lkg'))return 'Pre Primary 2';
+ const m=s.match(/(?:grade\s*)?([1-5])(?:st|nd|rd|th)?/);
+ if(m)return 'Grade '+m[1];
+ return String(v??'').trim()||'Unspecified';
+}
+function norm(v){return String(v??'').trim().toUpperCase().replace(/[^A-Z0-9]/g,'')}
+function cleanText(v){return v===null||v===undefined?'':String(v).trim()}
+function idText(v){if(v===null||v===undefined||v==='')return '';if(typeof v==='number'&&Number.isFinite(v))return String(Math.trunc(v));return String(v).trim().replace(/\.0$/,'')}
+function selectedWorkbook(kind){return document.getElementById(kind==='result'?'resultWorkbook':'attendanceWorkbook').files[0]}
+async function readWorkbook(kind){
+ if(typeof XLSX==='undefined')throw new Error('The Excel reader library did not load. Check your internet connection, reload the website and try again.');
+ const f=selectedWorkbook(kind);if(!f)throw new Error('Please choose the '+kind+' workbook first.');
+ const wb=XLSX.read(await f.arrayBuffer(),{type:'array',cellDates:true,raw:true});
+ workbookCache[kind]={wb,fileName:f.name};return wb;
+}
+function sheetRows(wb,sheetName){return XLSX.utils.sheet_to_json(wb.Sheets[sheetName],{header:1,defval:null,raw:true,blankrows:true})}
+function previewWorkbook(kind){
+ (async()=>{
+  const out=document.getElementById(kind==='result'?'resultWorkbookPreview':'attendanceWorkbookPreview');
+  out.innerHTML='<p class="muted">Reading workbook…</p>';
+  try{
+   const wb=await readWorkbook(kind), rows=sheetRows(wb,wb.SheetNames[0]);
+   let details=`<p><b>Worksheets found:</b> ${wb.SheetNames.map(n=>`<span class="pill">${esc(n)}</span>`).join(' ')}</p><p class="muted">First worksheet: ${esc(wb.SheetNames[0])} · ${rows.length} non-empty rows detected.</p>`;
+   if(kind==='result'){
+    const students=extractResultStudents(rows), marks=extractResultMarks(rows);
+    details+=`<p><b>Detected:</b> ${students.length} student profile rows · ${marks.length} non-blank assessment mark entries.</p>`;
+    details+=previewTable(['Admission No.','Class','Student','Father / Guardian','APAAR ID','PEN'],students.slice(0,8).map(s=>[esc(s.admission||'—'),esc(s.className),esc(s.name),esc(s.guardian||'—'),esc(s.apaar||'—'),esc(s.pen||'—')]));
+    if(students.length>8)details+=`<p class="muted">Showing first 8 of ${students.length} detected students.</p>`;
+    if(!students.length)details+='<div class="notice">No student rows detected. Confirm the workbook layout.</div>';
+   }else{
+    const parsed=extractAttendanceRows(rows);
+    details+=`<p><b>Detected:</b> ${parsed.length} student attendance summary rows.</p>`;
+    details+=previewTable(['Student','Class','Monthly summaries','Total days','Attendance %'],parsed.slice(0,8).map(s=>[esc(s.name),esc(s.className),s.months.length,esc(s.totalDays??'—'),s.percentage===null?'—':esc(Number(s.percentage).toFixed(2)+'%')]));
+    if(parsed.length>8)details+=`<p class="muted">Showing first 8 of ${parsed.length} detected rows.</p>`;
+    if(!parsed.length)details+='<div class="notice">No attendance rows detected. Confirm the workbook layout.</div>';
+   }
+   out.innerHTML=details;
+  }catch(e){out.innerHTML=`<div class="notice">Could not read workbook: ${esc(e.message)}</div>`}
+ })();
+}
+function previewTable(headers,rows){return rows.length?table(headers,rows):'<div class="empty">No rows to preview.</div>'}
+function extractResultStudents(rows){
+ const out=[];
+ for(let i=3;i<rows.length;i++){
+  const r=rows[i]||[],name=cleanText(r[3]),cl=cleanText(r[2]);
+  if(!name||!cl)continue;
+  out.push({rowNumber:i+1,admission:idText(r[0]),roll:idText(r[1]),className:classLabel(cl),name,guardian:cleanText(r[4]),mother:cleanText(r[5]),contact:idText(r[6]),dob:excelDate(r[7]),apaar:idText(r[63]),pen:idText(r[64]),status:'Active'});
+ }
+ return out;
+}
+function excelDate(v){if(!v)return '';if(v instanceof Date&&!isNaN(v))return v.toISOString().slice(0,10);if(typeof v==='number'){const d=XLSX.SSF.parse_date_code(v);return d?`${d.y}-${String(d.m).padStart(2,'0')}-${String(d.d).padStart(2,'0')}`:''}const s=String(v);return /^\d{4}-\d{2}-\d{2}/.test(s)?s.slice(0,10):s}
+function extractResultMarks(rows){
+ const out=[],groups=[{name:'English',start:8},{name:'Mathematics',start:18},{name:'EVS',start:28},{name:'Urdu',start:38},{name:'Kashmiri',start:48}];
+ const assessments=[{offset:0,name:'FA1',max:5},{offset:1,name:'FA2',max:5},{offset:2,name:'FA3',max:5},{offset:3,name:'FA4',max:5},{offset:4,name:'FA5',max:5},{offset:5,name:'FA6',max:5},{offset:8,name:'Co-curricular',max:20},{offset:9,name:'Summative Assessment',max:50}];
+ for(let i=3;i<rows.length;i++){
+  const r=rows[i]||[];if(!cleanText(r[3])||!cleanText(r[2]))continue;
+  for(const g of groups)for(const a of assessments){
+   const v=r[g.start+a.offset];if(v===null||v===undefined||v==='')continue;
+   const num=Number(v);if(!Number.isFinite(num))continue;
+   out.push({rowNumber:i+1,admission:idText(r[0]),roll:idText(r[1]),className:classLabel(r[2]),studentName:cleanText(r[3]),subject:g.name,assessment:a.name,obtained:num,maximum:a.max,status:'Scored'});
+  }
+ }
+ return out;
+}
+function extractAttendanceRows(rows){
+ const out=[],monthCols=[4,7,10,13,16,19,22,25,28],header=rows[2]||[];
+ for(let i=5;i<rows.length;i++){
+  const r=rows[i]||[],name=cleanText(r[2]),cl=cleanText(r[3]);if(!name||!cl)continue;
+  const months=[];
+  monthCols.forEach(c=>{
+   const v=r[c];if(v===null||v===undefined||v==='')return;
+   const dt=header[c];let month='';
+   if(dt instanceof Date&&!isNaN(dt))month=dt.toISOString().slice(0,7);
+   else if(typeof dt==='number'){const d=XLSX.SSF.parse_date_code(dt);if(d)month=`${d.y}-${String(d.m).padStart(2,'0')}`}
+   else if(dt)month=String(dt).slice(0,7);
+   months.push({month:month||`Month column ${c+1}`,present:Number(v)||0});
+  });
+  out.push({rowNumber:i+1,serial:idText(r[0]),admission:idText(r[1]),name,className:classLabel(cl),months,totalDays:numberOrNull(r[31]),percentage:numberOrNull(r[32])});
+ }
+ return out;
+}
+function numberOrNull(v){if(v===null||v===undefined||v==='')return null;const n=Number(v);return Number.isFinite(n)?n:null}
+function findExistingStudent(record){
+ const admission=norm(record.admission);
+ if(admission){const exact=db.students.find(s=>norm(s.admission)===admission);if(exact)return exact}
+ const n=norm(record.name),cl=classLabel(record.className);
+ return db.students.find(s=>norm(s.name)===n&&classLabel(s.className)===cl)||null;
+}
+function upsertImportedStudent(r){
+ let s=findExistingStudent(r);
+ const profile={name:r.name,guardian:r.guardian||'',dob:r.dob||'',className:classLabel(r.className),section:'',roll:r.roll||'',admission:r.admission||'',apaar:r.apaar||'',pen:r.pen||'',udise:'',contact:r.contact||'',address:'',status:'Active'};
+ if(s){Object.entries(profile).forEach(([k,v])=>{if(v!==''&&v!==null&&v!==undefined)s[k]=v});return s}
+ s={id:id(),...profile,photo:''};db.students.push(s);return s;
+}
+function importWorkbook(kind){
+ (async()=>{
+  try{
+   let cached=workbookCache[kind];if(!cached){await readWorkbook(kind);cached=workbookCache[kind]}
+   const rows=sheetRows(cached.wb,cached.wb.SheetNames[0]);
+   if(kind==='result'){
+    const profiles=extractResultStudents(rows),marks=extractResultMarks(rows);
+    if(!profiles.length)return alert('No student rows were detected. Nothing was imported.');
+    if(!confirm(`Import ${profiles.length} student profile rows and ${marks.length} non-blank assessment marks from "${cached.fileName}"? Matching profiles will be updated. Review the preview first.`))return;
+    const studentByRow=new Map();
+    profiles.forEach(p=>{const s=upsertImportedStudent(p);studentByRow.set(`${norm(p.admission)}|${norm(p.name)}|${classLabel(p.className)}`,s.id)});
+    let markCount=0,skipped=0;
+    marks.forEach(m=>{
+     const sid=studentByRow.get(`${norm(m.admission)}|${norm(m.studentName)}|${classLabel(m.className)}`)||findExistingStudent({admission:m.admission,name:m.studentName,className:m.className})?.id;
+     if(!sid){skipped++;return}
+     const existing=db.marks.find(x=>x.studentId===sid&&x.assessment===m.assessment&&x.subject===m.subject);
+     const rec={id:existing?.id||id(),studentId:sid,assessment:m.assessment,subject:m.subject,obtained:m.obtained,maximum:m.maximum,status:'Scored',date:new Date().toISOString().slice(0,10),sourceWorkbook:cached.fileName};
+     if(existing)Object.assign(existing,rec);else db.marks.push(rec);markCount++;
+    });
+    save();alert(`Result workbook imported. Student profiles processed: ${profiles.length}. Assessment marks imported/updated: ${markCount}. Marks skipped: ${skipped}. Blank cells remain blank, not zero.`);
+   }else{
+    const summaries=extractAttendanceRows(rows);if(!summaries.length)return alert('No attendance summary rows were detected. Nothing was imported.');
+    if(!confirm(`Import ${summaries.length} attendance summary rows from "${cached.fileName}"? Students will be matched by admission number or name and class. Unmatched students will be added as profiles.`))return;
+    let matched=0,created=0;
+    summaries.forEach(a=>{
+     let s=findExistingStudent({admission:a.admission,name:a.name,className:a.className});
+     if(!s){s=upsertImportedStudent({admission:a.admission,name:a.name,className:a.className,roll:a.serial});created++}else matched++;
+     const rec={id:(db.attendanceSummaries||[]).find(x=>x.studentId===s.id)?.id||id(),studentId:s.id,sourceWorkbook:cached.fileName,months:a.months,totalDays:a.totalDays,percentage:a.percentage,importedAt:new Date().toISOString()};
+     const idx=db.attendanceSummaries.findIndex(x=>x.studentId===s.id);if(idx>=0)db.attendanceSummaries[idx]=rec;else db.attendanceSummaries.push(rec);
+    });
+    save();alert(`Attendance workbook imported. Summary rows: ${summaries.length}. Matched existing students: ${matched}. New profiles added: ${created}. Monthly summaries remain separate from daily attendance.`);
+   }
+  }catch(e){alert('Import failed: '+e.message)}
+ })();
+}
+
+function download(name,content,type){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
+function exportJSON(){download('gps-pethgam-backup-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(db,null,2),'application/json')}
+function exportCSV(kind){const arr=db[kind];if(!arr.length)return alert('No records to export.');const keys=[...new Set(arr.flatMap(x=>Object.keys(x).filter(k=>k!=='photo')))];const cell=v=>'"'+String(v??'').replace(/"/g,'""')+'"';download(kind+'.csv',[keys.map(cell).join(','),...arr.map(x=>keys.map(k=>cell(x[k])).join(','))].join('\r\n'),'text/csv;charset=utf-8')}
+document.getElementById('restoreFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!x||!Array.isArray(x.students)||!Array.isArray(x.marks))throw Error('Invalid backup');if(confirm('Replace local prototype data with this backup?')){db={...db,...x};save();alert('Backup restored.')}}catch(err){alert('Could not restore backup: '+err.message)}e.target.value=''};r.readAsText(f)});
+function clearAll(){if(confirm('Permanently delete all prototype records from this browser? Export a backup first if needed.')){localStorage.removeItem(KEY);db={students:[],marks:[],attendance:[],attendanceSummaries:[],activities:[],settings:{schoolName:'Government Primary School Pethgam Wagoora',session:'2026–27',udise:'01022202207',hoi:'Mohammad Ashraf Rather',address:'Wagoora Babareshi Road, Near Zonal Education Office Wagoora, District Baramulla, Jammu & Kashmir – 193109'}};save();alert('Local prototype data cleared.')}} 
+load();document.getElementById('attendanceDate').value=new Date().toISOString().slice(0,10);updateAll();
+</script>
+</body>
+</html>
